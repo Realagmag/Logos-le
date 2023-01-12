@@ -1,22 +1,28 @@
+from PySide2.QtWidgets import QMainWindow, QApplication
 import sys
 from ui_wordle import Ui_MainWindow
 
+
 class WordleWindow(QMainWindow):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self._setupKeyboard()
         self._setupWindows()
 
-    def _setupKeyboard():
+    def _setupKeyboard(self):
+        pass
 
+    def _setupWindows(self):
+        pass
 
 
 def guiMain(args):
-    app = Ui_MainWindow(args)
-
-    pass
+    app = QApplication(args)
+    window = WordleWindow()
+    window.show()
+    return app.exec_()
 
 
 if __name__ == "__main__":
