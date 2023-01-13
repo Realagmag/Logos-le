@@ -26,24 +26,60 @@ class WordleWindow(QMainWindow):
         self._setupWindows()
         self.current_column = 1
         self.current_row = 1
-
+        self.all_labels = self.dict_all_labels()
 
     def _input_letter_by_button(self, button):
-        row = self.current_row
-        column = self.current_column
-        label_position = letter_box[row][column]
-        all_labels = self.ui.Windows.children()
-        for label in all_labels:
-            if str(label.objectName()) == label_position:
-                label.setText(button.text())
-        self.current_column += 1
-        pass
+        if button.text() == "Backspace":
+            self.delete_letter()
+        elif button.text() == "Enter":
+            self.check_guess()
+        elif self.current_column == 6:
+            pass
+        else:
+            row = self.current_row
+            column = self.current_column
+            # label_position = letter_box[row][column]
+
+            self.all_labels[row][column].setText(button.text())
+            # all_labels = self.ui.Windows.children()
+            # for label in all_labels:
+            #     if str(label.objectName()) == label_position:
+            #         label.setText(button.text())
+            self.current_column += 1
 
     def _setupWindows(self):
         pass
 
     def _setupKeyboard(self):
         self.ui.all_buttons.buttonClicked.connect(self._input_letter_by_button)
+
+    def delete_letter(self):
+        if self.current_column > 1:
+            self.current_column -= 1
+            row = self.current_row
+            column = self.current_column
+            self.all_labels[row][column].setText('')
+            # label_position = letter_box[row][column]
+            # all_labels = self.ui.Windows.children()
+            # for label in all_labels:
+            #     if str(label.objectName()) == label_position:
+            #         label.setText('')
+            # row = self.current_row
+            # column = self.current_column
+            # self.all_labels[row][column].
+        else:
+            pass
+
+    def dict_all_labels(self):
+        labels_listed = self.ui.Windows.children()
+        labels_listed.sort(key=lambda x: x.objectName())
+        labels_in_dict = {row: {column: labels_listed[(row-1)*5+(column-1)]
+                          for column in range(1, 6)}
+                          for row in range(1, 7)}
+        return labels_in_dict
+
+    def check_guess(self):
+        pass
 
 
 def guiMain(args):
