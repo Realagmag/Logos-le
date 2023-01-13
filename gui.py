@@ -1,20 +1,18 @@
 from PySide2.QtWidgets import QMainWindow, QApplication
 import sys
 from ui_wordle import Ui_MainWindow
+from classes import Word
+from random import choice
 
 
-letter_box = {1: {1: "r1c1", 2: "r1c2", 3: "r1c3",
-              4: "r1c4", 5: "r1c5"},
-              2: {1: "r2c1", 2: "r2c2", 3: "r2c3",
-              4: "r2c4", 5: "r2c5"},
-              3: {1: "r3c1", 2: "r3c2", 3: "r3c3",
-              4: "r3c4", 5: "r3c5"},
-              4: {1: "r4c1", 2: "r4c2", 3: "r4c3",
-              4: "r4c4", 5: "r4c5"},
-              5: {1: "r5c1", 2: "r5c2", 3: "r5c3",
-              4: "r5c4", 5: "r5c5"},
-              6: {1: "r6c1", 2: "r6c2", 3: "r6c3",
-              4: "r6c4", 5: "r6c5"}}
+def draw_password():
+    with open("all.words.txt", "r") as file_handle:
+        list_of_words = []
+        for line in file_handle:
+            line = line[:-1]
+            list_of_words.append(line)
+        word_to_guess = choice(list_of_words)
+        return (Word(word_to_guess), list_of_words)
 
 
 class WordleWindow(QMainWindow):
@@ -23,32 +21,27 @@ class WordleWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self._setupKeyboard()
-        self._setupWindows()
         self.current_column = 1
         self.current_row = 1
         self.all_labels = self.dict_all_labels()
+        self.password, self.all_words = draw_password()
 
     def _input_letter_by_button(self, button):
         if button.text() == "Backspace":
             self.delete_letter()
         elif button.text() == "Enter":
-            self.check_guess()
+            if self.current_column == 6:
+                self.check_guess()
+            else:
+                # Błąd, że musi być 5 liter wpisanych
+                pass
         elif self.current_column == 6:
             pass
         else:
             row = self.current_row
             column = self.current_column
-            # label_position = letter_box[row][column]
-
             self.all_labels[row][column].setText(button.text())
-            # all_labels = self.ui.Windows.children()
-            # for label in all_labels:
-            #     if str(label.objectName()) == label_position:
-            #         label.setText(button.text())
             self.current_column += 1
-
-    def _setupWindows(self):
-        pass
 
     def _setupKeyboard(self):
         self.ui.all_buttons.buttonClicked.connect(self._input_letter_by_button)
@@ -59,14 +52,6 @@ class WordleWindow(QMainWindow):
             row = self.current_row
             column = self.current_column
             self.all_labels[row][column].setText('')
-            # label_position = letter_box[row][column]
-            # all_labels = self.ui.Windows.children()
-            # for label in all_labels:
-            #     if str(label.objectName()) == label_position:
-            #         label.setText('')
-            # row = self.current_row
-            # column = self.current_column
-            # self.all_labels[row][column].
         else:
             pass
 
@@ -79,6 +64,35 @@ class WordleWindow(QMainWindow):
         return labels_in_dict
 
     def check_guess(self):
+        letters = ''
+        for label in self.all_labels[self.current_row].values():
+            letters += label.text().lower()
+        if letters in self.all_words:
+            written_word = Word(letters)
+            row = self.current_row
+            wht = "color: white"
+            border = "border: 2px solid black"
+            colors = self.password.compare(written_word)
+            for index, color in enumerate(colors):
+
+                self.all_labels[row][index+1].setStyleSheet(
+                    f"background-color: {color}; {border}; {wht};")
+                button_name = 2*letters[index]
+                for button in self.ui.Keyboard.children():
+                    if button.objectName() == button_name:
+                        button.setStyleSheet(
+                            f"background-color: {color}; {wht};")
+
+            self.current_row += 1
+            if self.current_row > 6:
+                self.game_lost()
+            self.current_column = 1
+        else:
+            # błąd, że nie ma takiego hasła w bazie
+            pass
+
+    def game_lost(self):
+        # jak w nazwie
         pass
 
 
