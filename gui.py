@@ -1,18 +1,7 @@
 from PySide2.QtWidgets import QMainWindow, QApplication
 import sys
 from ui_wordle import Ui_MainWindow
-from classes import Word
-from random import choice
-
-
-def draw_password():
-    with open("all.words.txt", "r") as file_handle:
-        list_of_words = []
-        for line in file_handle:
-            line = line[:-1]
-            list_of_words.append(line)
-        word_to_guess = choice(list_of_words)
-        return (Word(word_to_guess), list_of_words)
+from model import Word, draw_password, clear_from_nonlabels
 
 
 class WordleWindow(QMainWindow):
@@ -56,7 +45,8 @@ class WordleWindow(QMainWindow):
             pass
 
     def dict_all_labels(self):
-        labels_listed = self.ui.Windows.children()
+        window_widget_list = self.ui.Windows.children()
+        labels_listed = clear_from_nonlabels(window_widget_list)
         labels_listed.sort(key=lambda x: x.objectName())
         labels_in_dict = {row: {column: labels_listed[(row-1)*5+(column-1)]
                           for column in range(1, 6)}
@@ -81,7 +71,7 @@ class WordleWindow(QMainWindow):
                 for button in self.ui.Keyboard.children():
                     if button.objectName() == button_name:
                         button.setStyleSheet(
-                            f"background-color: {color}; {wht};")
+                            f"background-color: {color}; {border}; {wht};")
 
             self.current_row += 1
             if self.current_row > 6:
