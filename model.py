@@ -2,10 +2,10 @@ from PySide2.QtWidgets import QLabel
 from random import choice
 
 
-def clear_from_nonlabels(list):
+def filter_children(list, type):
     filtered_list = []
     for item in list:
-        if isinstance(item, QLabel):
+        if isinstance(item, type):
             filtered_list.append(item)
     return filtered_list
 
