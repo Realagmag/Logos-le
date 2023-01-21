@@ -7,6 +7,9 @@ from ui_theme import Ui_theme
 from ui_game_over import Ui_game_over
 from model import Word, draw_password, filter_children, create_link
 
+class WordBaseNotFoundError(FileNotFoundError):
+    pass
+
 
 class Game_over(QDialog):
     def __init__(self, parent=None):
@@ -55,13 +58,17 @@ class WordleWindow(QMainWindow):
         self.current_row = 1
         self.all_labels = self.dict_all_labels()
         self.keyboard_buttons = self.get_keyboard_buttons()
-        self.password, self.all_words = draw_password()
-
-        self.password = Word("place")
-
+        self.setpassword()
         self.theme = "standard"
         self.game_won = False
         self.color_history = ''
+
+    def setpassword(self):
+        try:
+            with open("all.words.txt", 'r') as file_handle:
+                self.password, self.all_words = draw_password(file_handle)
+        except FileNotFoundError:
+            raise WordBaseNotFoundError("Could not open word database")
 
     def _input_letter_by_button(self, button):
         self.clear_error_label()
@@ -169,7 +176,7 @@ class WordleWindow(QMainWindow):
                 self.game_over()
             self.current_row += 1
             self.color_history += "\n"
-            if self.current_row > 6:
+            if self.current_row > 6 and not self.game_won:
                 self.game_over()
             self.current_column = 1
         else:

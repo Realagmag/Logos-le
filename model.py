@@ -20,14 +20,20 @@ def filter_children(list, type):
     return filtered_list
 
 
-def draw_password():
-    with open("all.words.txt", "r") as file_handle:
-        list_of_words = []
-        for line in file_handle:
-            line = line[:-1]
-            list_of_words.append(line)
-        word_to_guess = choice(list_of_words)
-        return (Word(word_to_guess), list_of_words)
+def draw_password(file_handle):
+    list_of_words = []
+    for line in file_handle:
+        word = line[:-1]
+        if len(word) == 5:
+            list_of_words.append(word)
+        else:
+            raise IncorrectWordLengthError("Word has to 5 letters long")
+    word_to_guess = choice(list_of_words)
+    return (Word(word_to_guess), list_of_words)
+
+
+class IncorrectWordLengthError(Exception):
+    pass
 
 
 class Word():
