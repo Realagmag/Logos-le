@@ -1,18 +1,17 @@
 from random import choice
 
 
-def create_link(game):
-    ye = "\U0001F7E8"
-    gr = "\U0001F7E9"
-    bl = "\U0001F7EB"
-    row = game.current_row
-    attempt = f"{'X' if not game.game_won else str(row)}"
-    colors = game.color_history.format(green=gr, yellow=ye, grey=bl)
-    link = f"logos'le {attempt}/6\n{colors}"
-    return link
-
-
 def filter_children(list, type):
+    '''
+    The function that leaves only specific data type in list.
+
+    Parameters:
+        list (list): List that is filtered.
+        type (any): Type of data that must stay in list.
+
+    Returns:
+        filtered_list (list): List that cointain only on type of data.
+    '''
     filtered_list = []
     for item in list:
         if isinstance(item, type):
@@ -21,6 +20,17 @@ def filter_children(list, type):
 
 
 def draw_password(file_handle):
+    '''
+    The function that reads from file. It also checks if number of letters
+    in each word is correct.
+
+    Parameters:
+        file_handle (_io.TextIOWrapper): Indicator on current position in file.
+
+    Returns:
+        tuple (Word, list): Word that is randomly chosen from words in file,
+            list of all words in file.
+    '''
     list_of_words = []
     for line in file_handle:
         word = line[:-1]
@@ -33,10 +43,19 @@ def draw_password(file_handle):
 
 
 class IncorrectWordLengthError(Exception):
+    '''
+    The class used to catch word with incorrect word lenght.
+    '''
     pass
 
 
 class Word():
+    '''
+    The class for operations on words.
+
+    Attributes:
+        name (str): Name of word assigned to Word object.
+    '''
     def __init__(self, name):
         self.name = name
 
@@ -44,6 +63,18 @@ class Word():
         return self.name
 
     def compare(self, other):
+        '''
+        The function that compares two Word objects.
+
+        It analize the similarity of the word inputted by player
+        to the game's password Word in accordance with game rules.
+
+        Parameters:
+            other (Word): object of the Word class.
+        Returns:
+            list_of_colors (list): Color for each letter of the second word,
+            depending of its presence in first word.
+        '''
         list_of_colors = []
         not_green_letters = []
         for index, letter in enumerate(other.name):

@@ -5,26 +5,61 @@ from ui_wordle import Ui_MainWindow
 from ui_how_to_play import Ui_how_to_play
 from ui_theme import Ui_theme
 from ui_game_over import Ui_game_over
-from model import Word, draw_password, filter_children, create_link
+from model import Word, draw_password, filter_children
+
 
 class WordBaseNotFoundError(FileNotFoundError):
     pass
 
 
 class Game_over(QDialog):
+    '''
+    This is class responsible for displaying "Game Over" window.
+
+    Attributes:
+        ui (Ui_game_over): Stores objects used in QT "Game Over" window.
+        link (str): Game results with colordul squares
+        and player's guesses.
+    '''
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ui_game_over()
         self.ui.setupUi(self)
-        self.link = create_link(parent)
+        self.link = self.create_link(parent)
         self.setup_window()
 
     def setup_window(self):
         self.ui.results.setText(self.link)
         self.ui.link.setText(self.link)
 
+    def create_link(self, game):
+        '''
+        The function to generate Logos'le summary string.
+
+        Parameters:
+            game (WordleWindow): Main window of Logos'le game.
+
+        Returns:
+            link: Formatted string that includes number of guesses
+            and colorful squares that represent player's guesses.
+        '''
+        ye = "\U0001F7E8"
+        gr = "\U0001F7E9"
+        bl = "\U0001F7EB"
+        row = game.current_row
+        attempt = f"{'X' if not game.game_won else str(row)}"
+        colors = game.color_history.format(green=gr, yellow=ye, grey=bl)
+        link = f"logos'le {attempt}/6\n{colors}"
+        return link
+
 
 class How_to_play(QDialog):
+    '''
+    The class responsible for displaying "How to play" window.
+
+    Attributes:
+        ui (Ui_how_to_play): Stores objects of "How to play" window
+    '''
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ui_how_to_play()
@@ -32,6 +67,13 @@ class How_to_play(QDialog):
 
 
 class ThemeDialog(QDialog):
+    '''
+    The class that enables changing game's theme.
+
+    Attributes:
+        ui (Ui_theme): Stores objects of "Theme" window.
+        parent (WordleWindow): parent of QDialog
+    '''
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ui_theme()
@@ -48,6 +90,24 @@ class ThemeDialog(QDialog):
 
 
 class WordleWindow(QMainWindow):
+    '''
+    This is main class of Logos'le game.
+
+    Is responsible for displaying and operating main window of the game.
+
+    Attributes:
+        ui (Ui_MainWindow): Stores objects of "Logos'le" window.
+        current_row (int): Tracks number of guessing attempts.
+        current_column (int): Tracks current letter in typed word.
+        all_labes (dict): QLabels that display letters in order.
+        keyboard_buttons (list): QPushButtons that create keyboard.
+        theme (str): One of three possible game themes.
+        game_won (bool): Tracks if the word is guessed.
+        color_history(str): Memory of all used colors. Used to create
+            link with summary of the game.
+        password (Word): The word that must be guessed to win the game.
+        all_words (list): All possible logos'le words.
+    '''
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ui_MainWindow()
@@ -71,6 +131,15 @@ class WordleWindow(QMainWindow):
             raise WordBaseNotFoundError("Could not open word database")
 
     def _input_letter_by_button(self, button):
+        '''
+        The function to set reaction for keyboard Qpushbutton click.
+
+        Depending on button clicked it either writes letter to the
+        particular label, deletes letter or calls check guess function.
+
+        Parameters:
+            button (QPushButton): Button that called this function.
+        '''
         self.clear_error_label()
         if self.game_won or self.current_row == 7:
             pass
@@ -108,6 +177,15 @@ class WordleWindow(QMainWindow):
             self.call_error("You can't change theme while guessing")
 
     def change_theme(self, theme):
+        '''
+        The function to change theme of WordleWindow.
+
+        It uses setStyleSheet methods on all QWidgets in WordleWindow
+        to set their style appropriate to chosen theme.
+
+        Parameters:
+            theme (str): Style that WordleWindow has to adopt.
+        '''
         windows_children = self.ui.Windows.children()
         labels_listed = filter_children(windows_children, QLabel)
         if theme == "standard":
@@ -141,6 +219,11 @@ class WordleWindow(QMainWindow):
         self.ui.logo.setStyleSheet(f"color: {x};")
 
     def delete_letter(self):
+        '''
+        Function that clears QLabel pointed by
+        current_row and current_column class attributes
+        and moves tracking on previous QLabel in row.
+        '''
         if self.current_column > 1:
             self.current_column -= 1
             row = self.current_row
@@ -150,6 +233,18 @@ class WordleWindow(QMainWindow):
             pass
 
     def dict_all_labels(self):
+        '''
+        The function to create dictionary of QLabes.
+
+        This function gets all QLebels used to show letters
+        of player's guesses and arrange them into dictionary
+        so every row (keys) has assigned 5 QLabel objects that
+        create one 5 letter word (values)
+
+        Returns:
+            labels_in_dict(): Dictionary of QLabel objects
+                              in row(keys): columns(values) order.
+        '''
         window_widget_list = self.ui.Windows.children()
         labels_listed = filter_children(window_widget_list, QLabel)
         labels_listed.sort(key=lambda x: x.objectName())
@@ -159,11 +254,25 @@ class WordleWindow(QMainWindow):
         return labels_in_dict
 
     def get_keyboard_buttons(self):
+        '''
+        The function to list all QPushButtons used in keyboard.
+
+        Returns:
+            buttons_listed (list): list of all QPushButtons used in keyboard.
+        '''
         keyboard_widget_list = self.ui.Keyboard.children()
         buttons_listed = filter_children(keyboard_widget_list, QPushButton)
         return buttons_listed
 
     def check_guess(self):
+        '''
+        The Function that reacts to clicked "Enter" button.
+
+        It colors the QLabels depending on how close the quess was
+        in accordance with game rules. It also checks if
+        end of game conditions are met and calls game_over() function
+        if the game is either lost or won.
+        '''
         letters = ''
         for label in self.all_labels[self.current_row].values():
             letters += label.text().lower()
@@ -224,6 +333,9 @@ class WordleWindow(QMainWindow):
 
 
 def guiMain(args):
+    '''
+    The main function that starts the application.
+    '''
     app = QApplication(args)
     window = WordleWindow()
     window.show()

@@ -3,6 +3,7 @@ from model import IncorrectWordLengthError
 import pytest
 from io import StringIO
 
+
 def test_filter_children():
     list_to_filtr = [5, 4.5, '7', 2, 3, '4', [3, 4, 5]]
     assert filter_children(list_to_filtr, int) == [5, 2, 3]
@@ -23,6 +24,7 @@ def test_draw_password_not_5_letters_word():
     file_name = StringIO(data)
     with pytest.raises(IncorrectWordLengthError):
         draw_password(file_name)
+
 
 def test_create_Word():
     word = Word('pałac')
