@@ -1,6 +1,17 @@
 from random import choice
 
 
+def create_link(game):
+    ye = "\U0001F7E8"
+    gr = "\U0001F7E9"
+    bl = "\U0001F7EB"
+    row = game.current_row
+    attempt = f"{'X' if not game.game_won else str(row)}"
+    colors = game.color_history.format(green=gr, yellow=ye, grey=bl)
+    link = f"logos'le {attempt}/6\n{colors}"
+    return link
+
+
 def filter_children(list, type):
     filtered_list = []
     for item in list:
