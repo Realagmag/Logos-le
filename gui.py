@@ -20,12 +20,12 @@ class ThemeDialog(QDialog):
         self.ui = Ui_theme()
         self.ui.setupUi(self)
         self.setup_buttons()
-        self.chosen_theme = "standard"
+        self.chosen_theme = parent.theme
 
     def setup_buttons(self):
-        self.ui.theme_buttons.buttonClicked.connect(self.change_theme)
+        self.ui.theme_buttons.buttonClicked.connect(self.choose_theme)
 
-    def change_theme(self, button):
+    def choose_theme(self, button):
         self.chosen_theme = button.objectName()
 
 
@@ -44,14 +44,17 @@ class WordleWindow(QMainWindow):
         self.theme = "standard"
 
     def _input_letter_by_button(self, button):
+        self.clear_error_label()
         if button.text() == "Backspace":
             self.delete_letter()
         elif button.text() == "Enter":
             if self.current_column == 6:
                 self.check_guess()
             else:
-                # Błąd, że musi być 5 liter wpisanych
-                pass
+                self.ui.error_label.setStyleSheet("""
+                                    background-color: red;
+                                    color: white""")
+                self.ui.error_label.setText("Not enough letters")
         elif self.current_column == 6:
             pass
         else:
@@ -79,9 +82,11 @@ class WordleWindow(QMainWindow):
             self.theme = theme
             self.change_theme(self.theme)
         else:
-            #Wyświetlić info, że nie można
-            pass
-
+            self.ui.error_label.setStyleSheet("""
+                                    background-color: red;
+                                    color: white""")
+            self.ui.error_label.setText(
+                "You can't change theme while guessing")
 
     def change_theme(self, theme):
         windows_children = self.ui.Windows.children()
@@ -92,7 +97,8 @@ class WordleWindow(QMainWindow):
             combined_color = "black"
         else:
             combined_color = "white"
-        self.ui.Combined.setStyleSheet(f"""background-color:{combined_color}""")
+        self.ui.Combined.setStyleSheet(f"""background-color:
+                            {combined_color}""")
         for button in self.keyboard_buttons:
             button.setStyleSheet(f"""border: 1px solid
                             {'white' if theme=='black' else 'black'};
@@ -122,6 +128,8 @@ class WordleWindow(QMainWindow):
         self.ui.Windows.setStyleSheet(f"""border-top: 2px solid
                             {'white' if theme=='black'
                             else 'black'};""")
+        self.ui.logo.setStyleSheet(f"""color:
+                            {'white' if theme=='black' else 'black'};""")
 
     def delete_letter(self):
         if self.current_column > 1:
@@ -152,30 +160,41 @@ class WordleWindow(QMainWindow):
             letters += label.text().lower()
         if letters in self.all_words:
             written_word = Word(letters)
-            row = self.current_row
-            clr = "color: white"
-            if self.theme == "white" or self.theme == "standard":
-                border = "border: 2px solid black"
-            else:
-                border = "border: 2px solid white"
             colors = self.password.compare(written_word)
-            for index, color in enumerate(colors):
-
-                self.all_labels[row][index+1].setStyleSheet(
-                    f"background-color: {color}; {border}; {clr};")
-                button_name = 2*letters[index]
-                for button in self.ui.Keyboard.children():
-                    if button.objectName() == button_name:
-                        button.setStyleSheet(
-                            f"background-color: {color}; {border}; {clr};")
-
+            self.color_labels_and_buttons(colors, letters)
             self.current_row += 1
             if self.current_row > 6:
                 self.game_lost()
             self.current_column = 1
         else:
-            # błąd, że nie ma takiego hasła w bazie
-            pass
+            self.ui.error_label.setStyleSheet("""
+                                    background-color: red;
+                                    color: white""")
+            self.ui.error_label.setText("Not in word list")
+
+    def color_labels_and_buttons(self, colors, guess):
+        row = self.current_row
+        wht = "color: white"
+        if self.theme == "white" or self.theme == "standard":
+            border = "border: 2px solid black"
+        else:
+            border = "border: 2px solid white"
+        for index, color in enumerate(colors):
+            self.all_labels[row][index+1].setStyleSheet(
+                f"background-color: {color}; {border}; {wht};")
+            button_name = 2*guess[index]
+            for button in self.keyboard_buttons:
+                if button.objectName() == button_name:
+                    b = button.palette().color(button.backgroundRole())
+                    if b == 'green' or (b == '#FFAE20' and color != 'green'):
+                        break
+                    else:
+                        button.setStyleSheet(
+                            f"background-color: {color}; {border}; {wht};")
+
+    def clear_error_label(self):
+        self.ui.error_label.setStyleSheet('')
+        self.ui.error_label.setText('')
 
     def game_lost(self):
         # jak w nazwie

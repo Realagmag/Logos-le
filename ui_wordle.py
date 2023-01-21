@@ -29,9 +29,38 @@ class Ui_MainWindow(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.logo = QLabel(self.Combined)
+        self.logo.setObjectName(u"logo")
+        self.logo.setMinimumSize(QSize(166, 0))
+        self.logo.setMaximumSize(QSize(166, 16777215))
+        font = QFont()
+        font.setFamily(u"Nakula")
+        font.setPointSize(27)
+        font.setBold(True)
+        font.setItalic(True)
+        font.setWeight(75)
+        self.logo.setFont(font)
+
+        self.horizontalLayout.addWidget(self.logo)
+
         self.horizontalSpacer_9 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer_9)
+
+        self.error_label = QLabel(self.Combined)
+        self.error_label.setObjectName(u"error_label")
+        font1 = QFont()
+        font1.setFamily(u"Ubuntu")
+        font1.setPointSize(15)
+        font1.setStyleStrategy(QFont.PreferAntialias)
+        self.error_label.setFont(font1)
+        self.error_label.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout.addWidget(self.error_label)
+
+        self.horizontalSpacer_10 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer_10)
 
         self.theme = QPushButton(self.Combined)
         self.theme.setObjectName(u"theme")
@@ -49,9 +78,12 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.rules)
 
-        self.horizontalLayout.setStretch(0, 10)
-        self.horizontalLayout.setStretch(1, 1)
-        self.horizontalLayout.setStretch(2, 1)
+        self.horizontalLayout.setStretch(0, 2)
+        self.horizontalLayout.setStretch(1, 2)
+        self.horizontalLayout.setStretch(2, 4)
+        self.horizontalLayout.setStretch(3, 2)
+        self.horizontalLayout.setStretch(4, 1)
+        self.horizontalLayout.setStretch(5, 1)
 
         self.verticalLayout.addLayout(self.horizontalLayout)
 
@@ -71,15 +103,15 @@ class Ui_MainWindow(object):
         self.r4c5.setObjectName(u"r4c5")
         self.r4c5.setMinimumSize(QSize(57, 67))
         self.r4c5.setMaximumSize(QSize(57, 67))
-        font = QFont()
-        font.setFamily(u"DejaVu Sans")
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(75)
-        font.setStrikeOut(False)
-        self.r4c5.setFont(font)
+        font2 = QFont()
+        font2.setFamily(u"DejaVu Sans")
+        font2.setPointSize(14)
+        font2.setBold(True)
+        font2.setItalic(False)
+        font2.setUnderline(False)
+        font2.setWeight(75)
+        font2.setStrikeOut(False)
+        self.r4c5.setFont(font2)
         self.r4c5.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r4c5.setAlignment(Qt.AlignCenter)
 
@@ -89,7 +121,7 @@ class Ui_MainWindow(object):
         self.r2c2.setObjectName(u"r2c2")
         self.r2c2.setMinimumSize(QSize(57, 67))
         self.r2c2.setMaximumSize(QSize(57, 67))
-        self.r2c2.setFont(font)
+        self.r2c2.setFont(font2)
         self.r2c2.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r2c2.setAlignment(Qt.AlignCenter)
 
@@ -103,7 +135,7 @@ class Ui_MainWindow(object):
         self.r5c1.setObjectName(u"r5c1")
         self.r5c1.setMinimumSize(QSize(57, 67))
         self.r5c1.setMaximumSize(QSize(57, 67))
-        self.r5c1.setFont(font)
+        self.r5c1.setFont(font2)
         self.r5c1.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r5c1.setAlignment(Qt.AlignCenter)
 
@@ -113,7 +145,7 @@ class Ui_MainWindow(object):
         self.r4c2.setObjectName(u"r4c2")
         self.r4c2.setMinimumSize(QSize(57, 67))
         self.r4c2.setMaximumSize(QSize(57, 67))
-        self.r4c2.setFont(font)
+        self.r4c2.setFont(font2)
         self.r4c2.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r4c2.setAlignment(Qt.AlignCenter)
 
@@ -123,7 +155,7 @@ class Ui_MainWindow(object):
         self.r3c5.setObjectName(u"r3c5")
         self.r3c5.setMinimumSize(QSize(57, 67))
         self.r3c5.setMaximumSize(QSize(57, 67))
-        self.r3c5.setFont(font)
+        self.r3c5.setFont(font2)
         self.r3c5.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r3c5.setAlignment(Qt.AlignCenter)
 
@@ -133,7 +165,7 @@ class Ui_MainWindow(object):
         self.r5c5.setObjectName(u"r5c5")
         self.r5c5.setMinimumSize(QSize(57, 67))
         self.r5c5.setMaximumSize(QSize(57, 67))
-        self.r5c5.setFont(font)
+        self.r5c5.setFont(font2)
         self.r5c5.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r5c5.setAlignment(Qt.AlignCenter)
 
@@ -147,7 +179,7 @@ class Ui_MainWindow(object):
         self.r3c1.setObjectName(u"r3c1")
         self.r3c1.setMinimumSize(QSize(57, 67))
         self.r3c1.setMaximumSize(QSize(57, 67))
-        self.r3c1.setFont(font)
+        self.r3c1.setFont(font2)
         self.r3c1.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r3c1.setAlignment(Qt.AlignCenter)
 
@@ -157,7 +189,7 @@ class Ui_MainWindow(object):
         self.r4c4.setObjectName(u"r4c4")
         self.r4c4.setMinimumSize(QSize(57, 67))
         self.r4c4.setMaximumSize(QSize(57, 67))
-        self.r4c4.setFont(font)
+        self.r4c4.setFont(font2)
         self.r4c4.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r4c4.setAlignment(Qt.AlignCenter)
 
@@ -171,7 +203,7 @@ class Ui_MainWindow(object):
         self.r2c5.setObjectName(u"r2c5")
         self.r2c5.setMinimumSize(QSize(57, 67))
         self.r2c5.setMaximumSize(QSize(57, 67))
-        self.r2c5.setFont(font)
+        self.r2c5.setFont(font2)
         self.r2c5.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r2c5.setAlignment(Qt.AlignCenter)
 
@@ -181,7 +213,7 @@ class Ui_MainWindow(object):
         self.r1c2.setObjectName(u"r1c2")
         self.r1c2.setMinimumSize(QSize(57, 67))
         self.r1c2.setMaximumSize(QSize(57, 67))
-        self.r1c2.setFont(font)
+        self.r1c2.setFont(font2)
         self.r1c2.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r1c2.setAlignment(Qt.AlignCenter)
 
@@ -191,7 +223,7 @@ class Ui_MainWindow(object):
         self.r3c3.setObjectName(u"r3c3")
         self.r3c3.setMinimumSize(QSize(57, 67))
         self.r3c3.setMaximumSize(QSize(57, 67))
-        self.r3c3.setFont(font)
+        self.r3c3.setFont(font2)
         self.r3c3.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r3c3.setAlignment(Qt.AlignCenter)
 
@@ -201,7 +233,7 @@ class Ui_MainWindow(object):
         self.r6c1.setObjectName(u"r6c1")
         self.r6c1.setMinimumSize(QSize(57, 67))
         self.r6c1.setMaximumSize(QSize(57, 67))
-        self.r6c1.setFont(font)
+        self.r6c1.setFont(font2)
         self.r6c1.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r6c1.setAlignment(Qt.AlignCenter)
 
@@ -211,7 +243,7 @@ class Ui_MainWindow(object):
         self.r3c4.setObjectName(u"r3c4")
         self.r3c4.setMinimumSize(QSize(57, 67))
         self.r3c4.setMaximumSize(QSize(57, 67))
-        self.r3c4.setFont(font)
+        self.r3c4.setFont(font2)
         self.r3c4.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r3c4.setAlignment(Qt.AlignCenter)
 
@@ -221,7 +253,7 @@ class Ui_MainWindow(object):
         self.r1c4.setObjectName(u"r1c4")
         self.r1c4.setMinimumSize(QSize(57, 67))
         self.r1c4.setMaximumSize(QSize(57, 67))
-        self.r1c4.setFont(font)
+        self.r1c4.setFont(font2)
         self.r1c4.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r1c4.setAlignment(Qt.AlignCenter)
 
@@ -235,7 +267,7 @@ class Ui_MainWindow(object):
         self.r2c3.setObjectName(u"r2c3")
         self.r2c3.setMinimumSize(QSize(57, 67))
         self.r2c3.setMaximumSize(QSize(57, 67))
-        self.r2c3.setFont(font)
+        self.r2c3.setFont(font2)
         self.r2c3.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r2c3.setAlignment(Qt.AlignCenter)
 
@@ -245,7 +277,7 @@ class Ui_MainWindow(object):
         self.r4c1.setObjectName(u"r4c1")
         self.r4c1.setMinimumSize(QSize(57, 67))
         self.r4c1.setMaximumSize(QSize(57, 67))
-        self.r4c1.setFont(font)
+        self.r4c1.setFont(font2)
         self.r4c1.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r4c1.setAlignment(Qt.AlignCenter)
 
@@ -255,7 +287,7 @@ class Ui_MainWindow(object):
         self.r6c4.setObjectName(u"r6c4")
         self.r6c4.setMinimumSize(QSize(57, 67))
         self.r6c4.setMaximumSize(QSize(57, 67))
-        self.r6c4.setFont(font)
+        self.r6c4.setFont(font2)
         self.r6c4.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r6c4.setAlignment(Qt.AlignCenter)
 
@@ -265,7 +297,7 @@ class Ui_MainWindow(object):
         self.r2c4.setObjectName(u"r2c4")
         self.r2c4.setMinimumSize(QSize(57, 67))
         self.r2c4.setMaximumSize(QSize(57, 67))
-        self.r2c4.setFont(font)
+        self.r2c4.setFont(font2)
         self.r2c4.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r2c4.setAlignment(Qt.AlignCenter)
 
@@ -275,7 +307,7 @@ class Ui_MainWindow(object):
         self.r6c3.setObjectName(u"r6c3")
         self.r6c3.setMinimumSize(QSize(57, 67))
         self.r6c3.setMaximumSize(QSize(57, 67))
-        self.r6c3.setFont(font)
+        self.r6c3.setFont(font2)
         self.r6c3.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r6c3.setAlignment(Qt.AlignCenter)
 
@@ -285,7 +317,7 @@ class Ui_MainWindow(object):
         self.r6c2.setObjectName(u"r6c2")
         self.r6c2.setMinimumSize(QSize(57, 67))
         self.r6c2.setMaximumSize(QSize(57, 67))
-        self.r6c2.setFont(font)
+        self.r6c2.setFont(font2)
         self.r6c2.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r6c2.setAlignment(Qt.AlignCenter)
 
@@ -295,7 +327,7 @@ class Ui_MainWindow(object):
         self.r5c3.setObjectName(u"r5c3")
         self.r5c3.setMinimumSize(QSize(57, 67))
         self.r5c3.setMaximumSize(QSize(57, 67))
-        self.r5c3.setFont(font)
+        self.r5c3.setFont(font2)
         self.r5c3.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r5c3.setAlignment(Qt.AlignCenter)
 
@@ -305,7 +337,7 @@ class Ui_MainWindow(object):
         self.r5c2.setObjectName(u"r5c2")
         self.r5c2.setMinimumSize(QSize(57, 67))
         self.r5c2.setMaximumSize(QSize(57, 67))
-        self.r5c2.setFont(font)
+        self.r5c2.setFont(font2)
         self.r5c2.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r5c2.setAlignment(Qt.AlignCenter)
 
@@ -315,7 +347,7 @@ class Ui_MainWindow(object):
         self.r3c2.setObjectName(u"r3c2")
         self.r3c2.setMinimumSize(QSize(57, 67))
         self.r3c2.setMaximumSize(QSize(57, 67))
-        self.r3c2.setFont(font)
+        self.r3c2.setFont(font2)
         self.r3c2.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r3c2.setAlignment(Qt.AlignCenter)
 
@@ -325,7 +357,7 @@ class Ui_MainWindow(object):
         self.r2c1.setObjectName(u"r2c1")
         self.r2c1.setMinimumSize(QSize(57, 67))
         self.r2c1.setMaximumSize(QSize(57, 67))
-        self.r2c1.setFont(font)
+        self.r2c1.setFont(font2)
         self.r2c1.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r2c1.setAlignment(Qt.AlignCenter)
 
@@ -335,7 +367,7 @@ class Ui_MainWindow(object):
         self.r1c3.setObjectName(u"r1c3")
         self.r1c3.setMinimumSize(QSize(57, 67))
         self.r1c3.setMaximumSize(QSize(57, 67))
-        self.r1c3.setFont(font)
+        self.r1c3.setFont(font2)
         self.r1c3.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r1c3.setAlignment(Qt.AlignCenter)
 
@@ -345,7 +377,7 @@ class Ui_MainWindow(object):
         self.r1c5.setObjectName(u"r1c5")
         self.r1c5.setMinimumSize(QSize(57, 67))
         self.r1c5.setMaximumSize(QSize(57, 67))
-        self.r1c5.setFont(font)
+        self.r1c5.setFont(font2)
         self.r1c5.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r1c5.setAlignment(Qt.AlignCenter)
 
@@ -355,7 +387,7 @@ class Ui_MainWindow(object):
         self.r1c1.setObjectName(u"r1c1")
         self.r1c1.setMinimumSize(QSize(57, 67))
         self.r1c1.setMaximumSize(QSize(57, 67))
-        self.r1c1.setFont(font)
+        self.r1c1.setFont(font2)
         self.r1c1.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r1c1.setAlignment(Qt.AlignCenter)
 
@@ -365,7 +397,7 @@ class Ui_MainWindow(object):
         self.r6c5.setObjectName(u"r6c5")
         self.r6c5.setMinimumSize(QSize(57, 67))
         self.r6c5.setMaximumSize(QSize(57, 67))
-        self.r6c5.setFont(font)
+        self.r6c5.setFont(font2)
         self.r6c5.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r6c5.setAlignment(Qt.AlignCenter)
 
@@ -375,7 +407,7 @@ class Ui_MainWindow(object):
         self.r5c4.setObjectName(u"r5c4")
         self.r5c4.setMinimumSize(QSize(57, 67))
         self.r5c4.setMaximumSize(QSize(57, 67))
-        self.r5c4.setFont(font)
+        self.r5c4.setFont(font2)
         self.r5c4.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r5c4.setAlignment(Qt.AlignCenter)
 
@@ -385,7 +417,7 @@ class Ui_MainWindow(object):
         self.r4c3.setObjectName(u"r4c3")
         self.r4c3.setMinimumSize(QSize(57, 67))
         self.r4c3.setMaximumSize(QSize(57, 67))
-        self.r4c3.setFont(font)
+        self.r4c3.setFont(font2)
         self.r4c3.setStyleSheet(u"border: 1px solid black; background-color: white;")
         self.r4c3.setAlignment(Qt.AlignCenter)
 
@@ -439,11 +471,11 @@ class Ui_MainWindow(object):
         self.qq.setSizePolicy(sizePolicy1)
         self.qq.setMinimumSize(QSize(70, 62))
         self.qq.setMaximumSize(QSize(70, 62))
-        font1 = QFont()
-        font1.setFamily(u"DejaVu Sans")
-        font1.setBold(False)
-        font1.setWeight(50)
-        self.qq.setFont(font1)
+        font3 = QFont()
+        font3.setFamily(u"DejaVu Sans")
+        font3.setBold(False)
+        font3.setWeight(50)
+        self.qq.setFont(font3)
         self.qq.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_2.addWidget(self.qq)
@@ -455,7 +487,7 @@ class Ui_MainWindow(object):
         self.ww.setSizePolicy(sizePolicy1)
         self.ww.setMinimumSize(QSize(70, 62))
         self.ww.setMaximumSize(QSize(70, 62))
-        self.ww.setFont(font1)
+        self.ww.setFont(font3)
         self.ww.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_2.addWidget(self.ww)
@@ -467,7 +499,7 @@ class Ui_MainWindow(object):
         self.ee.setSizePolicy(sizePolicy1)
         self.ee.setMinimumSize(QSize(70, 62))
         self.ee.setMaximumSize(QSize(70, 62))
-        self.ee.setFont(font1)
+        self.ee.setFont(font3)
         self.ee.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_2.addWidget(self.ee)
@@ -479,7 +511,7 @@ class Ui_MainWindow(object):
         self.rr.setSizePolicy(sizePolicy1)
         self.rr.setMinimumSize(QSize(70, 62))
         self.rr.setMaximumSize(QSize(70, 62))
-        self.rr.setFont(font1)
+        self.rr.setFont(font3)
         self.rr.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_2.addWidget(self.rr)
@@ -491,7 +523,7 @@ class Ui_MainWindow(object):
         self.tt.setSizePolicy(sizePolicy1)
         self.tt.setMinimumSize(QSize(70, 62))
         self.tt.setMaximumSize(QSize(70, 62))
-        self.tt.setFont(font1)
+        self.tt.setFont(font3)
         self.tt.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_2.addWidget(self.tt)
@@ -503,7 +535,7 @@ class Ui_MainWindow(object):
         self.yy.setSizePolicy(sizePolicy1)
         self.yy.setMinimumSize(QSize(70, 62))
         self.yy.setMaximumSize(QSize(70, 62))
-        self.yy.setFont(font1)
+        self.yy.setFont(font3)
         self.yy.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_2.addWidget(self.yy)
@@ -515,7 +547,7 @@ class Ui_MainWindow(object):
         self.uu.setSizePolicy(sizePolicy1)
         self.uu.setMinimumSize(QSize(70, 62))
         self.uu.setMaximumSize(QSize(70, 62))
-        self.uu.setFont(font1)
+        self.uu.setFont(font3)
         self.uu.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_2.addWidget(self.uu)
@@ -527,7 +559,7 @@ class Ui_MainWindow(object):
         self.ii.setSizePolicy(sizePolicy1)
         self.ii.setMinimumSize(QSize(70, 62))
         self.ii.setMaximumSize(QSize(70, 62))
-        self.ii.setFont(font1)
+        self.ii.setFont(font3)
         self.ii.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_2.addWidget(self.ii)
@@ -539,7 +571,7 @@ class Ui_MainWindow(object):
         self.oo.setSizePolicy(sizePolicy1)
         self.oo.setMinimumSize(QSize(70, 62))
         self.oo.setMaximumSize(QSize(70, 62))
-        self.oo.setFont(font1)
+        self.oo.setFont(font3)
         self.oo.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_2.addWidget(self.oo)
@@ -551,7 +583,7 @@ class Ui_MainWindow(object):
         self.pp.setSizePolicy(sizePolicy1)
         self.pp.setMinimumSize(QSize(70, 62))
         self.pp.setMaximumSize(QSize(70, 62))
-        self.pp.setFont(font1)
+        self.pp.setFont(font3)
         self.pp.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_2.addWidget(self.pp)
@@ -589,7 +621,7 @@ class Ui_MainWindow(object):
         self.aa.setSizePolicy(sizePolicy1)
         self.aa.setMinimumSize(QSize(70, 62))
         self.aa.setMaximumSize(QSize(70, 62))
-        self.aa.setFont(font1)
+        self.aa.setFont(font3)
         self.aa.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_3.addWidget(self.aa)
@@ -601,7 +633,7 @@ class Ui_MainWindow(object):
         self.ss.setSizePolicy(sizePolicy1)
         self.ss.setMinimumSize(QSize(70, 62))
         self.ss.setMaximumSize(QSize(70, 62))
-        self.ss.setFont(font1)
+        self.ss.setFont(font3)
         self.ss.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_3.addWidget(self.ss)
@@ -613,7 +645,7 @@ class Ui_MainWindow(object):
         self.dd.setSizePolicy(sizePolicy1)
         self.dd.setMinimumSize(QSize(70, 62))
         self.dd.setMaximumSize(QSize(70, 62))
-        self.dd.setFont(font1)
+        self.dd.setFont(font3)
         self.dd.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_3.addWidget(self.dd)
@@ -625,7 +657,7 @@ class Ui_MainWindow(object):
         self.ff.setSizePolicy(sizePolicy1)
         self.ff.setMinimumSize(QSize(70, 62))
         self.ff.setMaximumSize(QSize(70, 62))
-        self.ff.setFont(font1)
+        self.ff.setFont(font3)
         self.ff.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_3.addWidget(self.ff)
@@ -637,7 +669,7 @@ class Ui_MainWindow(object):
         self.gg.setSizePolicy(sizePolicy1)
         self.gg.setMinimumSize(QSize(70, 62))
         self.gg.setMaximumSize(QSize(70, 62))
-        self.gg.setFont(font1)
+        self.gg.setFont(font3)
         self.gg.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_3.addWidget(self.gg)
@@ -649,7 +681,7 @@ class Ui_MainWindow(object):
         self.hh.setSizePolicy(sizePolicy1)
         self.hh.setMinimumSize(QSize(70, 62))
         self.hh.setMaximumSize(QSize(70, 62))
-        self.hh.setFont(font1)
+        self.hh.setFont(font3)
         self.hh.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_3.addWidget(self.hh)
@@ -661,7 +693,7 @@ class Ui_MainWindow(object):
         self.jj.setSizePolicy(sizePolicy1)
         self.jj.setMinimumSize(QSize(70, 62))
         self.jj.setMaximumSize(QSize(70, 62))
-        self.jj.setFont(font1)
+        self.jj.setFont(font3)
         self.jj.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_3.addWidget(self.jj)
@@ -673,7 +705,7 @@ class Ui_MainWindow(object):
         self.kk.setSizePolicy(sizePolicy1)
         self.kk.setMinimumSize(QSize(70, 62))
         self.kk.setMaximumSize(QSize(70, 62))
-        self.kk.setFont(font1)
+        self.kk.setFont(font3)
         self.kk.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_3.addWidget(self.kk)
@@ -685,7 +717,7 @@ class Ui_MainWindow(object):
         self.ll.setSizePolicy(sizePolicy1)
         self.ll.setMinimumSize(QSize(70, 62))
         self.ll.setMaximumSize(QSize(70, 62))
-        self.ll.setFont(font1)
+        self.ll.setFont(font3)
         self.ll.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_3.addWidget(self.ll)
@@ -722,7 +754,7 @@ class Ui_MainWindow(object):
         self.enter.setSizePolicy(sizePolicy1)
         self.enter.setMinimumSize(QSize(105, 62))
         self.enter.setMaximumSize(QSize(105, 62))
-        self.enter.setFont(font1)
+        self.enter.setFont(font3)
         self.enter.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_4.addWidget(self.enter)
@@ -734,7 +766,7 @@ class Ui_MainWindow(object):
         self.zz.setSizePolicy(sizePolicy1)
         self.zz.setMinimumSize(QSize(70, 62))
         self.zz.setMaximumSize(QSize(70, 62))
-        self.zz.setFont(font1)
+        self.zz.setFont(font3)
         self.zz.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_4.addWidget(self.zz)
@@ -746,7 +778,7 @@ class Ui_MainWindow(object):
         self.xx.setSizePolicy(sizePolicy1)
         self.xx.setMinimumSize(QSize(70, 62))
         self.xx.setMaximumSize(QSize(70, 62))
-        self.xx.setFont(font1)
+        self.xx.setFont(font3)
         self.xx.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_4.addWidget(self.xx)
@@ -758,7 +790,7 @@ class Ui_MainWindow(object):
         self.cc.setSizePolicy(sizePolicy1)
         self.cc.setMinimumSize(QSize(70, 62))
         self.cc.setMaximumSize(QSize(70, 62))
-        self.cc.setFont(font1)
+        self.cc.setFont(font3)
         self.cc.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_4.addWidget(self.cc)
@@ -770,7 +802,7 @@ class Ui_MainWindow(object):
         self.vv.setSizePolicy(sizePolicy1)
         self.vv.setMinimumSize(QSize(70, 62))
         self.vv.setMaximumSize(QSize(70, 62))
-        self.vv.setFont(font1)
+        self.vv.setFont(font3)
         self.vv.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_4.addWidget(self.vv)
@@ -782,7 +814,7 @@ class Ui_MainWindow(object):
         self.bb.setSizePolicy(sizePolicy1)
         self.bb.setMinimumSize(QSize(70, 62))
         self.bb.setMaximumSize(QSize(70, 62))
-        self.bb.setFont(font1)
+        self.bb.setFont(font3)
         self.bb.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_4.addWidget(self.bb)
@@ -794,7 +826,7 @@ class Ui_MainWindow(object):
         self.nn.setSizePolicy(sizePolicy1)
         self.nn.setMinimumSize(QSize(70, 62))
         self.nn.setMaximumSize(QSize(70, 62))
-        self.nn.setFont(font1)
+        self.nn.setFont(font3)
         self.nn.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_4.addWidget(self.nn)
@@ -806,7 +838,7 @@ class Ui_MainWindow(object):
         self.mm.setSizePolicy(sizePolicy1)
         self.mm.setMinimumSize(QSize(70, 62))
         self.mm.setMaximumSize(QSize(70, 62))
-        self.mm.setFont(font1)
+        self.mm.setFont(font3)
         self.mm.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_4.addWidget(self.mm)
@@ -818,7 +850,7 @@ class Ui_MainWindow(object):
         self.Backspace.setSizePolicy(sizePolicy1)
         self.Backspace.setMinimumSize(QSize(105, 62))
         self.Backspace.setMaximumSize(QSize(105, 62))
-        self.Backspace.setFont(font1)
+        self.Backspace.setFont(font3)
         self.Backspace.setStyleSheet(u"border: 1px solid black; background-color:white;")
 
         self.horizontalLayout_4.addWidget(self.Backspace)
@@ -865,6 +897,8 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Wordle", None))
+        self.logo.setText(QCoreApplication.translate("MainWindow", u"Logos'le", None))
+        self.error_label.setText("")
         self.theme.setText(QCoreApplication.translate("MainWindow", u"Theme", None))
         self.rules.setText(QCoreApplication.translate("MainWindow", u"How to play", None))
         self.r4c5.setText("")

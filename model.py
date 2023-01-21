@@ -1,4 +1,3 @@
-from PySide2.QtWidgets import QLabel
 from random import choice
 
 
@@ -29,11 +28,16 @@ class Word():
 
     def compare(self, other):
         list_of_colors = []
+        not_green_letters = []
+        for index, letter in enumerate(other.name):
+            if letter != self.name[index]:
+                not_green_letters.append(self.name[index])
         for index, letter in enumerate(other.name):
             if letter == self.name[index]:
                 list_of_colors.append('green')
-            elif letter in self.name:
+            elif letter in self.name and letter in not_green_letters:
                 list_of_colors.append('#FFAE20')
+                not_green_letters.remove(letter)
             else:
                 list_of_colors.append('grey')
         return list_of_colors
