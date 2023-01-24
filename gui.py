@@ -26,10 +26,11 @@ class Game_over(QDialog):
         self.ui = Ui_game_over()
         self.ui.setupUi(self)
         self.link = self.create_link(parent)
+        self.password = parent.password
         self.setup_window()
 
     def setup_window(self):
-        self.ui.results.setText(self.link)
+        self.ui.results.setText(f"The word is: {self.password}\n{self.link}")
         self.ui.link.setText(self.link)
 
     def create_link(self, game):
