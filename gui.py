@@ -18,7 +18,7 @@ class Game_over(QDialog):
 
     Attributes:
         ui (Ui_game_over): Stores objects used in QT "Game Over" window.
-        link (str): Game results with colordul squares
+        link (str): Game results with colorful squares
         and player's guesses.
     '''
     def __init__(self, parent=None):
@@ -35,7 +35,7 @@ class Game_over(QDialog):
 
     def create_link(self, game):
         '''
-        The function to generate Logos'le summary string.
+        Generate Logos'le summary link.
 
         Parameters:
             game (WordleWindow): Main window of Logos'le game.
@@ -230,8 +230,6 @@ class WordleWindow(QMainWindow):
             row = self.current_row
             column = self.current_column
             self.all_labels[row][column].setText('')
-        else:
-            pass
 
     def dict_all_labels(self):
         '''
@@ -270,8 +268,8 @@ class WordleWindow(QMainWindow):
         The Function that reacts to clicked "Enter" button.
 
         It colors the QLabels depending on how close the quess was
-        in accordance with game rules. It also checks if
-        end of game conditions are met and calls game_over() function
+        in accordance to the game rules. It also checks if
+        end of the game conditions are met and calls game_over() function
         if the game is either lost or won.
         '''
         letters = ''

@@ -3,14 +3,14 @@ from random import choice
 
 def filter_children(list, type):
     '''
-    The function that leaves only specific data type in list.
+    Get all elements from the list of given type.
 
     Parameters:
         list (list): List that is filtered.
         type (any): Type of data that must stay in list.
 
     Returns:
-        filtered_list (list): List that cointain only on type of data.
+        filtered_list (list): List that cointains only given type of data.
     '''
     filtered_list = []
     for item in list:
@@ -21,8 +21,7 @@ def filter_children(list, type):
 
 def draw_password(file_handle):
     '''
-    The function that reads from file. It also checks if number of letters
-    in each word is correct.
+    Load words from file and chose game's password.
 
     Parameters:
         file_handle (_io.TextIOWrapper): Indicator on current position in file.
@@ -37,7 +36,8 @@ def draw_password(file_handle):
         if len(word) == 5:
             list_of_words.append(word)
         else:
-            raise IncorrectWordLengthError("Word has to 5 letters long")
+            raise IncorrectWordLengthError(
+                f"Word has to 5 letters long, but {word} has {len(word)}")
     word_to_guess = choice(list_of_words)
     return (Word(word_to_guess), list_of_words)
 
@@ -64,13 +64,11 @@ class Word():
 
     def compare(self, other):
         '''
-        The function that compares two Word objects.
-
-        It analize the similarity of the word inputted by player
-        to the game's password Word in accordance with game rules.
+        Check what letters are placed correctly and set
+        corresponding color.
 
         Parameters:
-            other (Word): object of the Word class.
+            other (Word): Word to compare with.
         Returns:
             list_of_colors (list): Color for each letter of the second word,
             depending of its presence in first word.
