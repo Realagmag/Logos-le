@@ -1,0 +1,9 @@
+name: logosle
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10.12
+  - pip
+  - pip:
+    - pyside2==5.15.2.1
